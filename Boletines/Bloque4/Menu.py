@@ -24,21 +24,25 @@ def main():
         print()
         match(res):
             case "1":
-                print()
+                Mi_Clinica.AñadirTrabajador()
             case "2":
-                print()
+                Mi_Clinica.BorrarTrabajador()
             case "3":
-                Mi_Clinica.print_Medicos()
+                Mi_Clinica.printTrabajadores()
             case "4":
-                print()
+                print(Mi_Clinica.GetTrabajador())
             case "5":
-                print()
+                Medico = Mi_Clinica.GetTrabajador()
+                print(Medico.getNumeroAnhos())
             case "6":
-                print()
+                Enfermera = Mi_Clinica.GetTrabajador()
+                print(f"Hay {len(Enfermera.getPersonasCargo())} a cargo.")
             case "7":
-                print()
+                Enfermera = Mi_Clinica.GetTrabajador()
+                Enfermera.AñadirPersonaCargo()
             case "8":
-                print()
+                Enfermera = Mi_Clinica.GetTrabajador()
+                Enfermera.BorrarPersonaCargo()
             case "9":
                 print("¡Hasta pronto!\n")
 

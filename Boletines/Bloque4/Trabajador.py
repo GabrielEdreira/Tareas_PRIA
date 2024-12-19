@@ -46,21 +46,48 @@ class Trabajador:
 
 
 class Medico(Trabajador):
+    def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, Especialidad:str, FechaInicioCarrera:datetime, NumeroColegiado:float = None):
+        super().__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
+        self._Especialidad = Especialidad
+        self._FechaInicioCarrera = FechaInicioCarrera
+
+    def getNumeroAnhos(self):
+        return (datetime.datetime.now - self.FechaInicioCarrera).years()
+    
+    @property
+    def __str__(self):
+        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
+
+class Enfermera(Trabajador):
+    _PersonasCargo_ = dict()
     def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, AreaTrabajo:str, PersonasCargo:int, NumeroColegiado:float = None):
-        super.__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
+        super().__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
         self._AreaTrabajo = AreaTrabajo
         self._PersonasCargo = PersonasCargo
+
+    @property
+    def getPersonasCargo(self):
+        return self._PersonasCargo_
+    
+
+    def AñadirPersonaCargo(self):
+        NIF = input("¿NIF? ")
+        Nombre = input("¿Nombre? ")
+
+        self._PersonasCargo[NIF] = Persona(NIF, Nombre)
+
+    def BorrarPersonaCargo(self):
+        NIF = input("¿NIF? ")
+
+        if (self._PersonasCargo_.values().__contains__(NIF)):
+            self._PersonasCargo_.pop(NIF)
 
 
     def __str__(self):
         return f"{self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._AreaTrabajo}, Nº Personas:{self._PersonasCargo} }} {self._FechaNacimiento}"
 
-class Enfermera(Trabajador):
-    def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, Especialidad:str, FechaInicioCarrera:int, NumeroColegiado:float = None):
-        super.__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
-        self._Especialidad = Especialidad
-        self._FechaInicioCarrera = FechaInicioCarrera
 
-
-    def __str__(self):
-        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
+class Persona():
+    def __init__(self, NIF, Nombre):
+        self.NIF = NIF
+        self.Nombre = Nombre

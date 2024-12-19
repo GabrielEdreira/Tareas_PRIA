@@ -9,7 +9,7 @@ class Clinica():
 
     @property
     def get_Medicos(self):
-        return self._Medicos_.items()
+        return self._Medicos_
     def print_Medicos(self):
         aux = self._Medicos_.items()
         print(" -------- Clínica: -------- ")
@@ -39,9 +39,7 @@ class Clinica():
 
     @property
     def get_Enfermeras(self):
-        return self._Enfermeras_.items()
-    
-        return self._Medicos_.items()
+        return self._Enfermeras_
     def print_Enfermeras(self):
         aux = self._Enfermeras__.items()
         print(" -------- Clínica: -------- ")
@@ -68,3 +66,73 @@ class Clinica():
             raise ValueError("No existe esa enferemera.")
         
         self._Enfermeras_.pop(NIF_Enfermera)
+
+
+    def AñadirTrabajador(self):
+        aux = None
+        while(aux != "Medico" and aux != "Enfermera"):
+            aux = input("¿Medico o Enfermera? ")
+        
+            if (aux != "Medico" and aux != "Enfermera"):
+                print("Valor inválido.\n")
+        
+        NIF = input("¿NIF? ")
+        Nombre = input("¿Nombre? ")
+        FechaNac = input("¿Fecha de Nacimiento (dd/MM/yyyy)? ")
+        NumeroColegiado = input("¿Número de colegiado (ENTER para dejarlo en blanco)? ")
+        Sexo = input("¿Sexo (H/M)? ")
+
+        print()
+        match(aux):
+            case "Medico":
+                Especialidad = input("¿Especialidad? ")
+                FechaCarrera = input("¿Cuando empezó a ejercer? ")
+
+                self._Medicos_[NIF] = Trabajador.Medico(NIF,FechaNac, Nombre, Sexo, Especialidad, FechaCarrera, NumeroColegiado)
+
+            case "Enfermera":
+                Area = input("Area? ")
+                NumPersonas = input("¿Nº Personas? ")
+
+                self._Enfermeras_[NIF] = Trabajador.Enfermera(NIF,FechaNac, Nombre, Sexo, Area, NumPersonas, NumeroColegiado)
+
+    def BorrarTrabajador(self):
+        NIF = input("¿NIF? ")
+
+        if NIF in self._Medicos_.values(): 
+            self._Medicos_.pop(NIF)
+        elif NIF in self._Enfermeras_.values(): 
+            self._Enfermeras_.pop(NIF)
+        else:
+            print("No existen el Trabajador.\n")
+
+
+    def GetTrabajador(self) -> Trabajador:
+        NIF = input("¿NIF? ")
+
+        trabajador = None
+        if NIF in self._Medicos_.values(): 
+            trabajador = self._Medicos_.pop(NIF)
+        elif NIF in self._Enfermeras_.values(): 
+            trabajador = self._Enfermeras_.pop(NIF)
+        else:
+            print("No se encuentra el trabajador.\n")
+            return
+
+        return trabajador
+    
+    def printTrabajadores(self):
+        trabajadores = list()
+        if (len(self._Medicos_) > 0):
+            trabajadores.append(self._Medicos_)
+        if (len(self._Enfermeras_) > 0):
+            trabajadores.append(self._Enfermeras_)
+
+        print(" -------- Clínica: -------- ")
+
+        if (len(trabajadores) == 0):
+            print("    No hay trabajadores ")
+
+        for trabajador in trabajadores:
+            print(f" - {str(trabajador)}")
+        print(" --------------------------\n")
