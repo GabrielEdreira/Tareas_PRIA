@@ -56,7 +56,7 @@ class Medico(Trabajador):
     
     @property
     def __str__(self):
-        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
+        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ {f", Numero de colegiado: {self._NumeroColegiado}" if self._NumeroColegiado != l else ""} Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
 
 class Enfermera(Trabajador):
     _PersonasCargo_ = dict()
@@ -79,12 +79,12 @@ class Enfermera(Trabajador):
     def BorrarPersonaCargo(self):
         NIF = input("¿NIF? ")
 
-        if (self._PersonasCargo_.values().__contains__(NIF)):
+        if (self._PersonasCargo_.keys().__contains__(NIF)):
             self._PersonasCargo_.pop(NIF)
 
 
     def __str__(self):
-        return f"{self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._AreaTrabajo}, Nº Personas:{self._PersonasCargo} }} {self._FechaNacimiento}"
+        return f"{self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._AreaTrabajo}, Nº Personas:{self._PersonasCargo} }} {self._FechaNacimiento}\n"
 
 
 class Persona():

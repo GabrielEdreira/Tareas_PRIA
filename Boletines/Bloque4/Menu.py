@@ -30,7 +30,7 @@ def main():
             case "3":
                 Mi_Clinica.printTrabajadores()
             case "4":
-                print(Mi_Clinica.GetTrabajador())
+                print(str(Mi_Clinica.GetTrabajador()))
             case "5":
                 Medico = Mi_Clinica.GetTrabajador()
                 print(Medico.getNumeroAnhos())

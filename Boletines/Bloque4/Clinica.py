@@ -24,7 +24,7 @@ class Clinica():
     def insert_Medico(self, nuevoMedico:Trabajador.Medico):
         if not nuevoMedico:
             raise ValueError("El médico no puede ser inválido.")
-        if self._Medicos_.values().__contains__(nuevoMedico.getNIF()):
+        if self._Medicos_.keys().__contains__(nuevoMedico.getNIF()):
             raise ValueError("El médico ya existe.")
         
         self._Medicos_[nuevoMedico.get_NIF()] = nuevoMedico
@@ -32,7 +32,7 @@ class Clinica():
     def delete_Medico(self, NIF_Medico:str):
         if not NIF_Medico:
             raise ValueError("El NIF del médico no puede ser vacío.")
-        if not self._Medicos_.values().__contains__(NIF_Medico):
+        if not self._Medicos_.keys().__contains__(NIF_Medico):
             raise ValueError("No existe ese médico.")
         
         self._Medicos_.pop(NIF_Medico)
@@ -54,7 +54,7 @@ class Clinica():
     def insert_Enfermera(self, nuevaEnfermera:Trabajador.Enfermera):
         if not nuevaEnfermera:
             raise ValueError("La enfermera no puede ser inválida.")
-        if self._Enfermeras_.values().__contains__(nuevaEnfermera.getNIF()):
+        if self._Enfermeras_.keys().__contains__(nuevaEnfermera.getNIF()):
             raise ValueError("La enfermera ya existe.")
         
         self._Enfermeras_[nuevaEnfermera.get_NIF()] = nuevaEnfermera
@@ -62,7 +62,7 @@ class Clinica():
     def delete_Enfermera(self, NIF_Enfermera:str): 
         if not NIF_Enfermera:
             raise ValueError("El NIF de la enfermera no puede ser vacío.")
-        if not self._Enfermeras_.values().__contains__(NIF_Enfermera):
+        if not self._Enfermeras_.keys().__contains__(NIF_Enfermera):
             raise ValueError("No existe esa enferemera.")
         
         self._Enfermeras_.pop(NIF_Enfermera)
@@ -88,20 +88,20 @@ class Clinica():
                 Especialidad = input("¿Especialidad? ")
                 FechaCarrera = input("¿Cuando empezó a ejercer? ")
 
-                self._Medicos_[NIF] = Trabajador.Medico(NIF,FechaNac, Nombre, Sexo, Especialidad, FechaCarrera, NumeroColegiado)
+                self._Medicos_[NIF] = Trabajador.Medico(NIF, Nombre, FechaNac, Sexo, Especialidad, FechaCarrera, NumeroColegiado)
 
             case "Enfermera":
-                Area = input("Area? ")
+                Area = input("¿Area? ")
                 NumPersonas = input("¿Nº Personas? ")
 
-                self._Enfermeras_[NIF] = Trabajador.Enfermera(NIF,FechaNac, Nombre, Sexo, Area, NumPersonas, NumeroColegiado)
+                self._Enfermeras_[NIF] = Trabajador.Enfermera(NIF, Nombre, FechaNac, Sexo, Area, NumPersonas, NumeroColegiado)
 
     def BorrarTrabajador(self):
         NIF = input("¿NIF? ")
 
-        if NIF in self._Medicos_.values(): 
+        if NIF in self._Medicos_.keys(): 
             self._Medicos_.pop(NIF)
-        elif NIF in self._Enfermeras_.values(): 
+        elif NIF in self._Enfermeras_.keys(): 
             self._Enfermeras_.pop(NIF)
         else:
             print("No existen el Trabajador.\n")
@@ -111,10 +111,10 @@ class Clinica():
         NIF = input("¿NIF? ")
 
         trabajador = None
-        if NIF in self._Medicos_.values(): 
-            trabajador = self._Medicos_.pop(NIF)
-        elif NIF in self._Enfermeras_.values(): 
-            trabajador = self._Enfermeras_.pop(NIF)
+        if NIF in self._Medicos_.keys(): 
+            trabajador = self._Medicos_[NIF]
+        elif NIF in self._Enfermeras_.keys(): 
+            trabajador = self._Enfermeras_[NIF]
         else:
             print("No se encuentra el trabajador.\n")
             return
