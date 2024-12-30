@@ -1,4 +1,5 @@
 import Trabajador
+import datetime
 
 class Clinica():
     _Medicos_ = dict()
@@ -39,7 +40,7 @@ class Clinica():
 
     @property
     def get_Enfermeras(self):
-        return self._Enfermeras_
+        return self._Enfermeras_.items()
     def print_Enfermeras(self):
         aux = self._Enfermeras__.items()
         print(" -------- Clínica: -------- ")
@@ -66,8 +67,15 @@ class Clinica():
             raise ValueError("No existe esa enferemera.")
         
         self._Enfermeras_.pop(NIF_Enfermera)
+    
+    
+    def AñadirTrabajadorAuto(self, NIF, Nombre, FechaNac, Sexo, optional1, optional2, option, NumeroColegiado = None):
+            match(option):
+                case "1":
+                    self._Medicos_[NIF] = Trabajador.Medico(NIF, Nombre, FechaNac, Sexo, optional1, optional2, NumeroColegiado)
 
-
+                case "2":
+                    self._Enfermeras_[NIF] = Trabajador.Enfermera(NIF, Nombre, FechaNac, Sexo, optional1, optional2, NumeroColegiado)                 
     def AñadirTrabajador(self):
         aux = None
         while(aux != "Medico" and aux != "Enfermera"):
@@ -107,13 +115,13 @@ class Clinica():
             print("No existen el Trabajador.\n")
 
 
-    def GetTrabajador(self) -> Trabajador:
+    def GetTrabajador(self, option = None) -> Trabajador:
         NIF = input("¿NIF? ")
 
         trabajador = None
-        if NIF in self._Medicos_.keys(): 
+        if NIF in self._Medicos_.keys() and (option == "Medico" or option == None): 
             trabajador = self._Medicos_[NIF]
-        elif NIF in self._Enfermeras_.keys(): 
+        elif NIF in self._Enfermeras_.keys() and (option == "Enfermera" or option == None): 
             trabajador = self._Enfermeras_[NIF]
         else:
             print("No se encuentra el trabajador.\n")
@@ -122,17 +130,20 @@ class Clinica():
         return trabajador
     
     def printTrabajadores(self):
-        trabajadores = list()
-        if (len(self._Medicos_) > 0):
-            trabajadores.append(self._Medicos_)
-        if (len(self._Enfermeras_) > 0):
-            trabajadores.append(self._Enfermeras_)
+        trabajadores = list(self._Medicos_.values()) + list(self._Enfermeras_.values())
 
         print(" -------- Clínica: -------- ")
 
         if (len(trabajadores) == 0):
             print("    No hay trabajadores ")
 
+        #print(trabajadores)
         for trabajador in trabajadores:
-            print(f" - {str(trabajador)}")
+            print(f" - {trabajador}")
         print(" --------------------------\n")
+        
+        
+    def Inicializar(self, ok = True):
+        if (ok):
+            self.AñadirTrabajadorAuto('54128586H', 'Gabby', datetime.datetime(2000, 9, 9), 'H', 'Cirugia', datetime.datetime(2022, 9, 9), '1', 1)
+            self.AñadirTrabajadorAuto('54128586M', 'Gabby', datetime.datetime(2000, 9, 9), 'M', 'Trato de Personas', 0, '2')

@@ -52,39 +52,60 @@ class Medico(Trabajador):
         self._FechaInicioCarrera = FechaInicioCarrera
 
     def getNumeroAnhos(self):
-        return (datetime.datetime.now - self.FechaInicioCarrera).years()
+        current_date = datetime.datetime.now()
+        date = self._FechaInicioCarrera
+        
+        dif = (current_date.year - date.year)
+        if (current_date.month, current_date.day) < (date.month, date.day):
+            dif -= 1
+        return dif
     
-    @property
     def __str__(self):
-        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ {f", Numero de colegiado: {self._NumeroColegiado}" if self._NumeroColegiado != l else ""} Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
+        colegiado = self._NumeroColegiado if self._NumeroColegiado else ""
+        return (f"Médico: {self._Nombre} [{self._NIF}], Sexo: {self._Sexo}, " +
+                f"Fecha de nacimiento: {self._FechaNacimiento.strftime('%d/%m/%Y')}, " +
+                f"Especialidad: {self._Especialidad}, Fecha inicio carrera: {self._FechaInicioCarrera.strftime('%d/%m/%Y')}" +
+                f", Número de colegiado: {colegiado}")
+
 
 class Enfermera(Trabajador):
-    _PersonasCargo_ = dict()
+    _PersonasCargo = 0
     def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, AreaTrabajo:str, PersonasCargo:int, NumeroColegiado:float = None):
         super().__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
         self._AreaTrabajo = AreaTrabajo
         self._PersonasCargo = PersonasCargo
 
-    @property
     def getPersonasCargo(self):
-        return self._PersonasCargo_
-    
+        return self._PersonasCargo
 
+    """
+        Falta Modificarlo para empezar a gestionar personas realmente
+    """
     def AñadirPersonaCargo(self):
-        NIF = input("¿NIF? ")
-        Nombre = input("¿Nombre? ")
+        # NIF = input("¿NIF? ")
+        # Nombre = input("¿Nombre? ")
 
-        self._PersonasCargo[NIF] = Persona(NIF, Nombre)
+        # self._PersonasCargo[NIF] = Persona(NIF, Nombre)
+        self._PersonasCargo += 1
+        print(f"Se ha añadido una persona. {self._PersonasCargo}\n")
 
+    """
+        Falta Modificarlo para empezar a gestionar personas realmente
+    """
     def BorrarPersonaCargo(self):
-        NIF = input("¿NIF? ")
+        # NIF = input("¿NIF? ")
 
-        if (self._PersonasCargo_.keys().__contains__(NIF)):
-            self._PersonasCargo_.pop(NIF)
-
+        # if (self._PersonasCargo_.keys().__contains__(NIF)):
+        #     self._PersonasCargo_.pop(NIF)
+        self._PersonasCargo -= 1
+        print(f"Se ha eliminado una persona. {self._PersonasCargo}\n")
 
     def __str__(self):
-        return f"{self._Nombre}[{self._NIF}] {self._Sexo} {{ Area:{self._AreaTrabajo}, Nº Personas:{self._PersonasCargo} }} {self._FechaNacimiento}\n"
+        colegiado = self._NumeroColegiado if self._NumeroColegiado else ""
+        return (f"Enfermera: {self._Nombre} [{self._NIF}], Sexo: {self._Sexo}, " +
+                f"Fecha de nacimiento: {self._FechaNacimiento.strftime('%d/%m/%Y')}, " +
+                f"Área de trabajo: {self._AreaTrabajo}, Personas a cargo: {self._PersonasCargo}" +
+                f", Número de colegiado: {colegiado}")
 
 
 class Persona():
