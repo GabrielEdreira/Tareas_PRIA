@@ -1,7 +1,16 @@
 import datetime
 
 class Trabajador:
-    def __init__(self, NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado = None):
+    def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, NumeroColegiado:int = None):
+        """Constructor
+
+        Args:
+            NIF (str): NIF del Trabajador
+            Nombre (str): Nombre del Trabajador
+            FechaNacimiento (datetime): Fecha de Nacimiento del Trabajador
+            Sexo (str): Sexo del Trabajador
+            NumeroColegiado (int, optional): Numero de colegiado del Trabajador. Defaults to None.
+        """        
         self._NIF = NIF
         self._Nombre = Nombre
         self._FechaNacimiento = FechaNacimiento
@@ -37,9 +46,22 @@ class Trabajador:
 
     @property
     def get_NumeroColegiado(self):
+        """Método get para NumeroColegiado
+
+        Returns:
+            int: Número de Colegiado de un Trabajador
+        """        
         return self._NumeroColegiado
     @property
     def set_NumeroColegiado(self, nuevo_NumeroColegiado):
+        """Método set de NumeroColegiado
+
+        Args:
+            nuevo_NumeroColegiado (int): Número de colegiado de un trabajador
+
+        Raises:
+            ValueError: Lanza error si el valor a settear es nulo
+        """        
         if not nuevo_NumeroColegiado:
             raise ValueError("El número de colegiado no puede estar vacío.")
         self._NumeroColegiado = nuevo_NumeroColegiado
@@ -47,11 +69,18 @@ class Trabajador:
 
 class Medico(Trabajador):
     def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, Especialidad:str, FechaInicioCarrera:datetime, NumeroColegiado:float = None):
+        """Constructor
+        """           
         super().__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
         self._Especialidad = Especialidad
         self._FechaInicioCarrera = FechaInicioCarrera
 
     def getNumeroAnhos(self):
+        """Método para la obtención del número de años que lleva ejerciciendo un médico
+
+        Returns:
+            int: Número de años ejerciciendo
+        """        
         current_date = datetime.datetime.now()
         date = self._FechaInicioCarrera
         
@@ -61,6 +90,11 @@ class Medico(Trabajador):
         return dif
     
     def __str__(self):
+        """Método str sobreescrito
+
+        Returns:
+            str: Una cadena con una estructura en concreto
+        """   
         colegiado = self._NumeroColegiado if self._NumeroColegiado else ""
         return (f"Médico: {self._Nombre} [{self._NIF}], Sexo: {self._Sexo}, " +
                 f"Fecha de nacimiento: {self._FechaNacimiento.strftime('%d/%m/%Y')}, " +
@@ -71,17 +105,23 @@ class Medico(Trabajador):
 class Enfermera(Trabajador):
     _PersonasCargo = 0
     def __init__(self, NIF:str, Nombre:str, FechaNacimiento:datetime, Sexo:str, AreaTrabajo:str, PersonasCargo:int, NumeroColegiado:float = None):
+        """Constructor
+        """        
         super().__init__(NIF, Nombre, FechaNacimiento, Sexo, NumeroColegiado)
         self._AreaTrabajo = AreaTrabajo
         self._PersonasCargo = PersonasCargo
 
     def getPersonasCargo(self):
+        """Método para la obtención del parámetro PersonasCargo de una enfermera
+
+        Returns:
+            int: Número de personas a cargo de la enfermera
+        """
         return self._PersonasCargo
 
-    """
-        Falta Modificarlo para empezar a gestionar personas realmente
-    """
     def AñadirPersonaCargo(self):
+        """Este método podría gestionar personas en si pero por ahora no
+        """        
         # NIF = input("¿NIF? ")
         # Nombre = input("¿Nombre? ")
 
@@ -89,10 +129,9 @@ class Enfermera(Trabajador):
         self._PersonasCargo += 1
         print(f"Se ha añadido una persona. {self._PersonasCargo}\n")
 
-    """
-        Falta Modificarlo para empezar a gestionar personas realmente
-    """
     def BorrarPersonaCargo(self):
+        """Este método podría gestionar personas en si pero por ahora no
+        """
         # NIF = input("¿NIF? ")
 
         # if (self._PersonasCargo_.keys().__contains__(NIF)):
@@ -101,6 +140,11 @@ class Enfermera(Trabajador):
         print(f"Se ha eliminado una persona. {self._PersonasCargo}\n")
 
     def __str__(self):
+        """Método str sobreescrito
+
+        Returns:
+            str: Una cadena con una estructura en concreto
+        """        
         colegiado = self._NumeroColegiado if self._NumeroColegiado else ""
         return (f"Enfermera: {self._Nombre} [{self._NIF}], Sexo: {self._Sexo}, " +
                 f"Fecha de nacimiento: {self._FechaNacimiento.strftime('%d/%m/%Y')}, " +
