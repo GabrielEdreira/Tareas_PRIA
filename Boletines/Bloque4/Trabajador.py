@@ -119,6 +119,9 @@ class Enfermera(Trabajador):
         """
         return self._PersonasCargo
 
+    """
+        Falta Modificarlo para empezar a gestionar personas realmente
+    """
     def AñadirPersonaCargo(self):
         """Este método podría gestionar personas en si pero por ahora no
         """        
@@ -129,6 +132,9 @@ class Enfermera(Trabajador):
         self._PersonasCargo += 1
         print(f"Se ha añadido una persona. {self._PersonasCargo}\n")
 
+    """
+        Falta Modificarlo para empezar a gestionar personas realmente
+    """
     def BorrarPersonaCargo(self):
         """Este método podría gestionar personas en si pero por ahora no
         """
