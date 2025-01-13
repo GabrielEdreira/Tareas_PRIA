@@ -2,7 +2,7 @@ import Trabajador
 import Clinica
 
 def printMenu():
-    print("Gestión de los trabajadores del hospital\n"
+    print("\nGestión de los trabajadores del hospital\n"
         + "1. Añadir trabajador\n"
         + "2. Borrar trabajador\n"
         + "3. Mostrar lista de trabajadores\n"
@@ -15,6 +15,8 @@ def printMenu():
 
 def main():
     Mi_Clinica = Clinica.Clinica()
+
+    Mi_Clinica.Inicializar()
 
     res = None
     while (res != "9"):
@@ -32,17 +34,21 @@ def main():
             case "4":
                 print(str(Mi_Clinica.GetTrabajador()))
             case "5":
-                Medico = Mi_Clinica.GetTrabajador()
-                print(Medico.getNumeroAnhos())
+                Medico = Mi_Clinica.GetTrabajador("Medico")
+                if (Medico != None):
+                    print(f"Ha trabajado un total de {Medico.getNumeroAnhos()} años.")
             case "6":
-                Enfermera = Mi_Clinica.GetTrabajador()
-                print(f"Hay {len(Enfermera.getPersonasCargo())} a cargo.")
+                Enfermera = Mi_Clinica.GetTrabajador("Enfermera")
+                if (Enfermera != None):
+                    print(f"Hay {Enfermera.getPersonasCargo()} personas a cargo.")
             case "7":
-                Enfermera = Mi_Clinica.GetTrabajador()
-                Enfermera.AñadirPersonaCargo()
+                Enfermera = Mi_Clinica.GetTrabajador("Enfermera")
+                if (Enfermera != None):
+                    Enfermera.AñadirPersonaCargo()
             case "8":
-                Enfermera = Mi_Clinica.GetTrabajador()
-                Enfermera.BorrarPersonaCargo()
+                Enfermera = Mi_Clinica.GetTrabajador("Enfermera")
+                if (Enfermera != None):
+                    Enfermera.BorrarPersonaCargo()
             case "9":
                 print("¡Hasta pronto!\n")
 
