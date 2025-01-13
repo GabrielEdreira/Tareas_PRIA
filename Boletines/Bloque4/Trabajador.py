@@ -56,7 +56,7 @@ class Medico(Trabajador):
     
     @property
     def __str__(self):
-        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ {f", Numero de colegiado: {self._NumeroColegiado}" if self._NumeroColegiado != l else ""} Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
+        return f" {self._Nombre}[{self._NIF}] {self._Sexo} {{ {f", Numero de colegiado: {self._NumeroColegiado}" if self._NumeroColegiado != 1 else ""} Area:{self._Especialidad}, Fecha Inicio Carrera:{self._FechaInicioCarrera} }} {self._FechaNacimiento} \n"
 
 class Enfermera(Trabajador):
     _PersonasCargo_ = dict()
