@@ -1,0 +1,44 @@
+{
+  "bloques": {
+    "primera": {
+      "pregunta": "¿Hojas con forma de agujas largas?",
+      "respuesta": {
+        "si": "segunda",
+        "no": "tercera"
+      },
+      "tipo": "pregunta"
+    },
+    "segunda": {
+      "pregunta": "PINO",
+      "respuesta": {
+        "si": "",
+        "no": ""
+      },
+      "tipo": "respuesta"
+    },
+    "tercera": {
+      "pregunta": "¿Acículas reunidas en grupos?",
+      "respuesta": {
+        "si": "cuarta",
+        "no": "quinta"
+      },
+      "tipo": "pregunta"
+    },
+    "cuarta": {
+      "pregunta": "CEDRO",
+      "respuesta": {
+        "si": "",
+        "no": ""
+      },
+      "tipo": "respuesta"
+    },
+    "quinta": {
+      "pregunta": "ABETO",
+      "respuesta": {
+        "si": "",
+        "no": ""
+      },
+      "tipo": "respuesta"
+    }
+  }
+}
